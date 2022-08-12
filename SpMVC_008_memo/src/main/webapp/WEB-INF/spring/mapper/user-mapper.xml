@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.callor.memo.persistance.UserDao">
+ 
+ 	<select id="selectAll" resultType="UserVO">
+ 		SELECT * FROM tbl_users
+ 	</select>
+ 	<select id="findById" resultType="UserVO">
+ 		SELECT * FROM tbl_users
+ 		WHERE Id = #{Id} 	
+ 	</select>
+ 	<insert id="insert" parameterType="UserVO">
+ 		INSERT INTO tbl_users(
+ 			Id,
+ 			nickname
+ 		) VALUES (
+ 			#{Id},
+ 			#{nickname}
+ 		)
+ 	</insert>
+ 	<update id="update" parameterType="UserVO">
+ 		UPDATE tbl_users SET
+ 			nickname = #{nickname}
+ 		WHERE Id = #{Id}
+ 	</update>
+ 	<delete id="delete">
+ 	</delete>
+ 
+ 	<select id="create_user_table">
+ 		CREATE TABLE IF NOT EXISTS tbl_users (
+ 			Id VARCHAR(25) PRIMARY KEY,
+ 			nickname VARCHAR(25)
+ 		)
+ 		
+ 	</select> 
+ 	
+ </mapper> 
