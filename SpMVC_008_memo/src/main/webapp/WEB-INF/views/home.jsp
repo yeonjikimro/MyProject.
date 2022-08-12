@@ -23,6 +23,10 @@
         width: 600px;
     }
     div.image_window {
+    	display: flex;
+    	align-items: center;
+    	justify-content: center;
+    	margin: 40px auto;
         width: 600px;
         height: 400px;
         overflow: hidden;
@@ -84,11 +88,11 @@
 <body>
     <div class="image_window">
         <div class="images">
-            <img src="/images/australian.jpg"/>
-            <img src="/images/dessert.jpg"/> 
-            <img src="/images/russian.jpg"/> 
-            <img src="/images/women.jpg"/> 
-            <img src="/images/yoga.jpg"/> 
+            <img src="${rootPath}/static/image/android.png"/>
+            <img src="${rootPath}/static/image.java.png"/> 
+            <img src="${rootPath}/static/image/javascriptpng.png"/> 
+            <img src="${rootPath}/static/image/react.png"/> 
+            <img src="${rootPath}/static/image/spring.png"/> 
         </div>
         <div class="btn_box">
             <button class="btn prev">&#10094;</button>

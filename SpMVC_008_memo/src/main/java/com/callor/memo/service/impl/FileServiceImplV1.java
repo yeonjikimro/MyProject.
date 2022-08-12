@@ -16,7 +16,7 @@ import com.callor.memo.service.FileUpService;
 public class FileServiceImplV1 implements FileUpService {
 
 	/*
-	 * servlet-context.xml ì— ì„ ì–¸ëœ  ë¬¸ìì—´ ë³€ìˆ˜ ê°’ ì—°ê²°í•˜ê¸°
+	 * servlet-context.xml ¿¡ ¼±¾ğµÈ  ¹®ÀÚ¿­ º¯¼ö °ª ¿¬°áÇÏ±â
 	 */
 	@Autowired
 	protected String upLoadFolder;
@@ -25,31 +25,31 @@ public class FileServiceImplV1 implements FileUpService {
 	@Override
 	public String fileUp(MultipartFile file) {
 
-		// íŒŒì¼ ì •ë³´ê°€ ì—†ìœ¼ë©´ ë”ì´ìƒ ì§„í–‰í•˜ì§€ ë§ê¸°
+		// ÆÄÀÏ Á¤º¸°¡ ¾øÀ¸¸é ´õÀÌ»ó ÁøÇàÇÏÁö ¸»±â
 		if(file == null) {
 			return null;
 		}
 		
-		// ì €ì¥í•  í´ë” í™•ì¸í•˜ê¸°
+		// ÀúÀåÇÒ Æú´õ È®ÀÎÇÏ±â
 		// java.io.File import
 		File dir = new File(upLoadFolder);
-		// ì—…ë¡œë“œí•  í´ë”ê°€ ì—†ìœ¼ë©´
+		// ¾÷·ÎµåÇÒ Æú´õ°¡ ¾øÀ¸¸é
 		if( dir.exists() == false) {
-			// í´ë”ë¥¼ ë§Œë“¤ì–´ë¼
+			// Æú´õ¸¦ ¸¸µé¾î¶ó
 			dir.mkdirs();
 		}
 		
-		// ì—…ë¡œë“œëœ íŒŒì¼ì˜ ì´ë¦„ getter
+		// ¾÷·ÎµåµÈ ÆÄÀÏÀÇ ÀÌ¸§ getter
 		String originFileName = file.getOriginalFilename();
 		
-		// í•´í‚¹ì„ ë°©ì§€í•˜ê¸° ìœ„í•˜ì—¬ íŒŒì¼ ì´ë¦„ ë³€ê²½í•˜ê¸°
-		// 1. UUID ë¬¸ìì—´ ìƒì„±
+		// ÇØÅ·À» ¹æÁöÇÏ±â À§ÇÏ¿© ÆÄÀÏ ÀÌ¸§ º¯°æÇÏ±â
+		// 1. UUID ¹®ÀÚ¿­ »ı¼º
 		String uuStr = UUID.randomUUID().toString();
 		
-		// ì›ë˜ íŒŒì¼ ì´ë¦„ê³¼ UUID ë¥¼ í•©ì„±í•˜ì—¬ ìƒˆë¡œìš´ íŒŒì¼ ì´ë¦„ ì§€ì •í•˜ê¸°
+		// ¿ø·¡ ÆÄÀÏ ÀÌ¸§°ú UUID ¸¦ ÇÕ¼ºÇÏ¿© »õ·Î¿î ÆÄÀÏ ÀÌ¸§ ÁöÁ¤ÇÏ±â
 		String saveFileName = String.format("%s-%s", uuStr, originFileName);
 		
-		// ì„œë²„ì— ì €ì¥í•˜ê¸° ìœ„í•œ íŒŒì¼ ê°ì²´ ìƒì„±
+		// ¼­¹ö¿¡ ÀúÀåÇÏ±â À§ÇÑ ÆÄÀÏ °´Ã¼ »ı¼º
 		File saveFile = new File(upLoadFolder, saveFileName);
 		
 		try {
@@ -79,12 +79,12 @@ public class FileServiceImplV1 implements FileUpService {
 			return;
 		}
 		
-		// ì—…ë¡œë“œ í´ë”ì™€ íŒŒì¼ ì´ë¦„ì„ ë¬¶ì–´ íŒŒì¼ ê°ì²´ ìƒì„±
+		// ¾÷·Îµå Æú´õ¿Í ÆÄÀÏ ÀÌ¸§À» ¹­¾î ÆÄÀÏ °´Ã¼ »ı¼º
 		File deleteFile = new File(upLoadFolder, fileName);
 		
-		// ì‹¤ì œ íŒŒì¼ì´ ì¡´ì¬í•˜ëŠ”ì§€ í™•ì¸í•˜ê³ 
+		// ½ÇÁ¦ ÆÄÀÏÀÌ Á¸ÀçÇÏ´ÂÁö È®ÀÎÇÏ°í
 		if(deleteFile.exists()) {
-			// ì¡´ì¬í•˜ë©´ íŒŒì¼ì„ ì‚­ì œ
+			// Á¸ÀçÇÏ¸é ÆÄÀÏÀ» »èÁ¦
 			deleteFile.delete();
 		}
 		
