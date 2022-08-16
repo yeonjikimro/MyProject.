@@ -6,7 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.callor.todo.persistance.TodoDao;
+import com.callor.todo.persistance.ClassicDao;
 import com.callor.todo.persistance.UserDao;
 
 /*
@@ -19,14 +19,13 @@ public class BeanService {
 	private UserDao userDao;
 	
 	@Autowired
-	private TodoDao todoDao;
+	private ClassicDao todoDao;
 	
 	// 자동실행 하기 (꼼수)
 	@Bean
 	public void create_table() {
 		userDao.create_user_table();
 		userDao.create_auth_table();
-		todoDao.create_todo_table();
 	}
 	
 	@Bean

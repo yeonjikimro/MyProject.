@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.callor.todo.persistance.ClassicDao">
+
+	<select id="selectAll" resultType="ClassicVO">
+		select b.m_seq, a.s_seq,
+		a.song, a.musician, b.mood, a.address From tbl_songList as a
+		LEFT join tbl_moodList as b ON a.s_seq = b.s_seq
+	</select>
+	
+	<select id="findByMood" resultType="ClassicVO">
+		SELECT b.m_seq, a.s_seq,
+		a.song, a.musician, b.mood, a.address From tbl_moodList as b
+		LEFT join tbl_songList as a ON b.s_seq = a.s_seq
+		WHERE mood = #{mood}
+	</select>
+
+
+	<select id="findById" resultType="ClassicVO">
+		SELECT * FROM tbl_moodList
+		WHERE m_seq = #{m_seq}
+	</select>
+
+	<!-- insert 를 할때 username 칼럼에 로그인한 사용자 정보를 함께 insert 하여 username 에 해당하는 
+		데이터만 추출할 수 있도록 -->
+	<insert id="insert" parameterType="ClassicVO">
+		INSERT INTO tbl_joinList(
+		m_seq,
+		s_seq,
+		song,
+		musician,
+		address,
+		mood
+		) VALUE(
+		#{m_seq},
+		#{s_seq},
+		#{song},
+		#{musician},
+		#{address},
+		#{mood}
+		)
+	</insert>
+
+	<update id="update">
+	</update>
+	<delete id="delete"></delete>
+
+</mapper> 

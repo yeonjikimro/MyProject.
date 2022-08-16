@@ -4,6 +4,13 @@
 <c:set value="${pageContext.request.contextPath}" var="rootPath" />    
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib uri="http://www.springframework.org/tags/form"  prefix="form"%>
+<%@ include file="../home.jsp" %>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
 <style>
 	div.todo_body {
 		width: 60%;
@@ -47,50 +54,56 @@ document.addEventListener("DOMContentLoaded",()=>{
         }
     })
 })
-</script>
 
+const rootPath = "${rootPath}"
+
+</script>
+<script src="${rootPath}/static/js/todo.js?20220816002"></script>
+<body>
 <div class="todo_body w3-card-4">
 	<sec:authorize access="isAuthenticated()">
-		<h1 class="w3-text-blue">[ <sec:authentication property="principal.username" /> ] 님의 TODO LIST</h1>
-		<c:forEach items="${TODOS}" var="TODO">
-			<div class="check_list">
-				<input type="checkbox" name="이름">
-			
-			</div>
-		
-		
-		
-			<div 
-				<c:if test='${empty TODO.t_edate}'> data-seq="${TODO.t_seq}" </c:if>
-				title="시작 : ${TODO.t_sdate}, ${TODO.t_stime}" 
-				class="todo_content w3-border w3-padding-16 w3-margin w3-tooltip
-				<c:if test='${not empty TODO.t_edate}'> complete </c:if>
-				">
-				${TODO.t_content}
-				<span class="todo_content w3-text">
-					( 시작 : ${TODO.t_sdate }  ${TODO.t_stime } )
-				</span>
-				
-				<c:if test="${not empty TODO.t_edate}">
-					<span class="todo_content">완료</span>
-					<span class="todo_content">${TODO.t_edate}</span>
-					<span class="todo_content">${TODO.t_etime}</span>
-				</c:if>
-
-				<c:if test="${TODO.t_complete}">
-					<span class="todo_content">완료</span>
-					<span class="todo_content">${TODO.t_edate}</span>
-					<span class="todo_content">${TODO.t_etime}</span>
-				</c:if>
-				
-			</div>
-		</c:forEach>
-		<form:form>
-			<input name="t_content"
-					value="${TODO.t_content}" 
-					placeholder="TODO Insert" 
-					class="w3-input w3-border"/>
-		</form:form>
+		<h1 class="w3-text-blue"> [<sec:authentication property="principal.username" /> ] 님의 TODO LIST</h1>
 	</sec:authorize>
 </div>
+<form:form>
+
+</form:form>
+<div>
+		<select class="deal" name="method">
+					<option value="">오늘의 기분</option>
+					<option value="슬픔">슬픔</option>
+					<option value="비">비</option>
+					<option value="힘">힘</option>
+					<option value="공부">공부</option>
+					<option value="아침">아침</option>
+					<option value="힐링">힐링</option>
+		</select>
+		<script>
+			docume
+		
+		</script>
+		<table>
+				<tr>
+					<th>번호</th>
+					<th>곡 이름</th>
+					<th>작곡가</th>
+					<th>주소</th>
+				</tr>
+				<c:forEach items="${CLASSIC}" var="classic" varStatus="INDEX">
+					<tr>
+						<td>${INDEX.count}</td>
+						<td>${classic.song}</td>
+						<td>${classic.musician}</td>
+						<td>${classic.address}</td>
+						<td style="display: none">${classic.mood}</td>
+					</tr>
+				</c:forEach>
+			</table>
+</div>
+
+
+
+
+</body>
+</html>
 

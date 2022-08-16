@@ -105,13 +105,8 @@
 <nav>
 	<ul>
 		<li><a href="${rootPath}/">HOME</a></li>
-		<li><a href="${rootPath}/medi/test">나에게 맞는 알약 알아보기</a></li>
-		<li><a href="${rootPath}/medi/search">알약 추천</a></li>
-		<li><a href="${rootPath}/word/home">게시판</a></li>
-			<li>
-				<span><a href="${rootPath}/word/home">문의게시판</a></span>
-				<span><a href="${rootPath}/word/tip">정보들</a></span>
-			</li>
+		<li><a href="${rootPath}/classic/test">맞춤 클래식 찾아보기</a></li>
+		<li><a href="${rootPath}/notice/home">클래식 정보</a></li>
 		
 		<sec:authorize access="isAnonymous()">
 			<li><a href="${rootPath}/user/login">로그인</a></li>
@@ -134,7 +129,7 @@
 		</c:when>
 		<c:otherwise>
 			<article class="welcome">
-				<h1>TODO List 애플리케이션 2022</h1>
+				<h1>클래식 정보	</h1>
 				<p>TODO List 를 사용하시려면 회원가입, 로그인을 해 주세요
 			</article>
 		</c:otherwise>	

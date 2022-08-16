@@ -1,12 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const checkbox = document.querySelector("table.todotable");
 
-  checkbox?.addEventListener("click", (e) => {
-    const td = e.target;
-    if (td.tagName === "CON") {
-      const tr = td.closest("TR");
-      const a_seq = tr.dataset.seq;
-      document.location.href = `${rootPath}/${seq}/complete}`;
-    }
-  });
+  const deal_select = document.querySelector("select.deal")
+
+
+  deal_select?.addEventListener("change",(e)=>{
+    const value = e.target.value
+    document.location.href = `${rootPath}/classic/test?mood=${value}`
+
+
+  })
+
 });
