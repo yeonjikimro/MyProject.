@@ -4,7 +4,7 @@
 <c:set value="${pageContext.request.contextPath}" var="rootPath" />    
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib uri="http://www.springframework.org/tags/form"  prefix="form"%>
-<%@ include file="../home.jsp" %>
+<%@ include file="../include/header.jsp" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -18,14 +18,30 @@
 		padding:2rem;
 	}
 	
-	div.todo_content {
-		cursor:pointer; 
-		
+	div select.deal {
+		width: 50px auto;
+		text-align: center;
+	}
+	div.select_div {
+		margin: 40px auto;
 	}
 	
-	div.complete {
-		text-decoration:line-through wavy;
-		color:green;
+	table {
+	}
+	div.c_list {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin: 100px auto;
+		
+	}
+	div h1.title {
+	margin: 50px auto;
+		
+	}
+	div.2_list {
+		margin: 100px auto;
 	}
 
 </style>
@@ -60,16 +76,13 @@ const rootPath = "${rootPath}"
 </script>
 <script src="${rootPath}/static/js/todo.js?20220816002"></script>
 <body>
-<div class="todo_body w3-card-4">
-	<sec:authorize access="isAuthenticated()">
-		<h1 class="w3-text-blue"> [<sec:authentication property="principal.username" /> ] 님의 TODO LIST</h1>
-	</sec:authorize>
-</div>
-<form:form>
-
-</form:form>
-<div>
-		<select class="deal" name="method">
+<div class="c_list">
+	<div>
+		<h1 class="title" >Classic Recommend</h1>
+	</div>
+<div class="2_list">
+	<div class="select_div">
+		<select style="width:200px" class="deal" name="method">
 					<option value="">오늘의 기분</option>
 					<option value="슬픔">슬픔</option>
 					<option value="비">비</option>
@@ -78,11 +91,14 @@ const rootPath = "${rootPath}"
 					<option value="아침">아침</option>
 					<option value="힐링">힐링</option>
 		</select>
-		<script>
-			docume
-		
-		</script>
-		<table>
+	</div>
+		<table class="w3-table w3-striped">
+		<colgroup>
+			<col width="100px">
+			<col width="200px">
+			<col width="100px">
+			<col width="300px">
+		</colgroup>
 				<tr>
 					<th>번호</th>
 					<th>곡 이름</th>
@@ -94,11 +110,12 @@ const rootPath = "${rootPath}"
 						<td>${INDEX.count}</td>
 						<td>${classic.song}</td>
 						<td>${classic.musician}</td>
-						<td>${classic.address}</td>
+						<td><a href="${classic.address}">${classic.address}</a></td>
 						<td style="display: none">${classic.mood}</td>
 					</tr>
 				</c:forEach>
 			</table>
+		</div>
 </div>
 
 
