@@ -29,6 +29,14 @@
     -webkit-display: box; 
     -webkit-box-orient: vertical;
 	}
+	ul.pagination {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		text-align: center;
+		margin: 30px auto;
+		font-size: 100px;
+	}
 	
 </style>
 </head>
@@ -37,7 +45,6 @@
 
 	<thead>
 		<tr>
-			<th>번호</th>
 			<th>공연 종류</th>
 			<th>공연 이름</th>
 			<th>곡 명</th>
@@ -51,7 +58,6 @@
 	<tbody>
 		<c:forEach items="${SEARCH}" var="search" varStatus="INDEX">
 		<tr data-seq="${search.PERF_NO}">
-			<td>${INDEX.count}</td>
 			<td>${search.GUBUN2}</td>
 			<td>${search.TITLE_KOR}</td>
 			<td>${search.SONG_TITLE_KOR}</td>
@@ -63,20 +69,13 @@
 		</c:forEach>
 	</tbody>
 	</table>
-	
-
-	<th:block layout:fragment="paging">
-                <nav aria-label="Page navigation" class="text-center">
                     <ul class="pagination">
-                        <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                        <li><a href="${rootPath}/music/search?pageno=1">1</a></li>
+                        <li><a href="${rootPath}/music/search?pageno=2">2</a></li>
+                        <li><a href="${rootPath}/music/search?pageno=3">3</a></li>
+                        <li><a href="${rootPath}/music/search?pageno=4">4</a></li>
+                        <li><a href="${rootPath}/music/search?pageno=5">5</a></li>
                     </ul>
-                </nav>
-            </th:block>
+
 </body>
 </html>

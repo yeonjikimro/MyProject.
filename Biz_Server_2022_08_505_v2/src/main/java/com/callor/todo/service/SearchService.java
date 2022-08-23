@@ -9,5 +9,8 @@ public interface SearchService {
 	public String queryString(String search);
 	public List<SearchVO> getSearchVOs (String queryString);
 	public SearchVO findById(Long PERF_NO);
+	public String queryString(int pageno);
+	
+	
 	
 }

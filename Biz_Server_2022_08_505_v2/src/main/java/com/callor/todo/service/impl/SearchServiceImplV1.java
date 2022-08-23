@@ -36,27 +36,11 @@ public class SearchServiceImplV1 implements SearchService{
 		public String queryString(String search) {
 
 			String queryString = SearchConfig.API_FULL_URL;
-			String encodeParams = null;
 			
-			try {
-				encodeParams = "?" + URLEncoder.encode("serviceKey","UTF-8");
-				
-				encodeParams += "&" + URLEncoder.encode("pageNo","UTF-8");
-				encodeParams += "=1";
-				
-				encodeParams += "&" + URLEncoder.encode("numOfRows","UTF-8");
-				encodeParams += "=10";
-				
-				encodeParams += "&" + URLEncoder.encode("resultType","UTF-8");
-				encodeParams += "=json";
-				
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			queryString = String.format(queryString,1 ,10 );
 			
-//			queryString += encodeParams;
-			log.debug("쿼리 문자열 {}", queryString);
+			log.debug("쿼리 스트링 {}", queryString);
+			
 			return queryString;
 		}
 
@@ -74,7 +58,7 @@ public class SearchServiceImplV1 implements SearchService{
 				e.printStackTrace();
 			}
 			
-			// API 에 JSON type 으로 데이터를 요청하기 위한 헤더 생성
+			
 			HttpHeaders headers = new HttpHeaders();
 			headers.setAccept(
 					Collections.singletonList(MediaType.APPLICATION_JSON)
@@ -82,11 +66,10 @@ public class SearchServiceImplV1 implements SearchService{
 			HttpEntity<String> headerEntity 
 				= new HttpEntity<String>("parameter",headers);
 			
-			// 데이터를 수신하여 VO 로 변환하기 위한 객체 선언
+			
 			RestTemplate restTemp = new RestTemplate();
 			
-			// String type 으로 데이터를 수신하여 어떤 형태로
-			// 데이터가 수신되는지 확인하는 절차
+			
 			ResponseEntity<String> resString = null;
 			resString = restTemp.exchange(foodRestURI, 
 					HttpMethod.GET,headerEntity,String.class);
@@ -95,7 +78,7 @@ public class SearchServiceImplV1 implements SearchService{
 			log.debug("{}",resString.getBody());
 			log.debug("=".repeat(100));
 			
-			// 수신된 데이터를 VO 로 변환하기
+			
 			ResponseEntity<SearchRoot> resFoodObject = null;
 			resFoodObject = restTemp.exchange(
 					foodRestURI, HttpMethod.GET,
@@ -112,10 +95,27 @@ public class SearchServiceImplV1 implements SearchService{
 		@Override
 		public SearchVO findById(Long PERF_NO) {
 			// TODO Auto-generated method stub
-			return searchService.findById(PERF_NO);
+			return null;
 		}
+
+
+
+		@Override
+		public String queryString(int pageno) {
+			
+			String queryString = SearchConfig.API_FULL_URL;
+			
+			int startIndex = (pageno-1) * 10 +1;
+			int endIndex = startIndex + 10;
+			queryString = String.format(queryString,startIndex ,endIndex );
+			log.debug("페이지 쿼리 {}", queryString);
+			return queryString;
+		}
+
 		
-		}
+}
+
+		
 
 
 

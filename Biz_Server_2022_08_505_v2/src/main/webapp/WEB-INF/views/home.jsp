@@ -21,12 +21,21 @@ section.main {
 	flex: 1;
 }
 
+ul {
+	display: flex;
+	list-style: none;
+	flex-wrap: wrap;
+}
+
 article.welcome {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+img {
+	width: 150px;
 }
 </style>
 </head>
@@ -36,7 +45,11 @@ article.welcome {
 
 				<article class="welcome">
 					<h1>클래식 정보</h1>
-					<p>TODO List 를 사용하시려면 회원가입, 로그인을 해 주세요
+					<ul>
+					<c:forEach begin="1" end="3" items="${SEARCH}" var="poster" >
+						<li><img src="${poster.IMGSRC}"></li>
+					</c:forEach>
+					</ul>
 				</article>
 </section>
 </body>

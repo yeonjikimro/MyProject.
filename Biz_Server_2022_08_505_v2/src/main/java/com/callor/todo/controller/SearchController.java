@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.callor.todo.model.SearchVO;
@@ -28,9 +29,21 @@ public class SearchController {
 	}
 	
 	@RequestMapping(value="/search", method=RequestMethod.GET)
-	public String music(Model model, SearchVO searchVO) {
+	public String music(Model model,
+			@RequestParam(name = "pageno", required = false, defaultValue="1") int pageno) {
 		
-		String queryString = searchService.queryString(null);
+//		searchPage.setCurrentPageNo(pageno);
+//		
+//		// 페이지 계산
+//		searchService.getSearchVOs(encodeParams);
+//		log.debug("페이지 계산 {}", searchPage.toString());
+//		
+//		// 데이터 가져오기
+//		List<SearchVO> dataList = searchService.getSearchVOs(encodeParams);
+//		model.addAttribute("PAGE", dataList);
+//		
+//		
+		String queryString = searchService.queryString(pageno);
 		
 		List<SearchVO> searchList = searchService.getSearchVOs(queryString);
 		model.addAttribute("SEARCH", searchList);
