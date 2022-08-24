@@ -40,35 +40,42 @@ nav {
 	background-color: #691417;
 	color: white;
 	height: 10%;
+	marin-top: 30px;
 }
 
 nav ul {
 	list-style: none;
 	display: flex;
 	vertical-align: middle;
-
+	margin-bottom: 0;
 }
 
 nav li {
-	padding: 16px 12px;
+	padding-top: 30px;
 	display: flex;
 	vertical-align: middle;
+	display: flex;
+	margin-bottom: 0;
+}
+
+
+nav li:hover {
+	cursor: pointer;
+		border-bottom: 3px solid transparent;
+	transition: 1s;
 }
 
 nav a {
 	text-decoration: none;
 	color: inherit;
-	magin: 5px 0;
 	padding: 0 12px;
-	border-bottom: 3px solid transparent;
-	transition: 1s;
 }
 
 nav a:hover {
 	border-bottom: 3px solid #ddd
 }
 
-nav li:nth-of-type(4) {
+nav li:nth-of-type(5) {
 	margin-left: auto;
 }
 
@@ -80,10 +87,6 @@ nav li:last-of-type {
 	margin-right: 30px;
 }
 
-section.main {
-	flex: 1;
-}
-
 article.welcome {
 	height: 100%;
 	display: flex;
@@ -91,15 +94,20 @@ article.welcome {
 	justify-content: center;
 	align-items: center;
 }
+
+nav li img {
+	width: 200px;
+}
 </style>
 </head>
 <body>
 	<nav>
 		<ul>
-			<li><img alt="logo" src="${rootPath}/static/images/header4.png"></li>
+			<li><a href="${rootPath}/"><img alt="logo" src="${rootPath}/static/images/header4.png" ></a></li>
 			<li><a href="${rootPath}/">HOME</a></li>
 			<li><a href="${rootPath}/classic/test">맞춤 클래식 찾아보기</a></li>
 			<li><a href="${rootPath}/music/search">음악 검색하기</a></li>
+			<li><a href="${rootPath}/notice/text">게시판</a></li>
 
 			<sec:authorize access="isAnonymous()">
 				<li><a href="${rootPath}/user/login">로그인</a></li>
@@ -112,16 +120,16 @@ article.welcome {
 			</sec:authorize>
 		</ul>
 	</nav>
-	<section class="main">
-		<c:choose>
-			<c:when test="${LAYOUT == 'JOIN' }">
-				<%@ include file="/WEB-INF/views/user/join.jsp"%>
-			</c:when>
-			<c:when test="${LAYOUT == 'LOGIN' }">
-				<%@ include file="/WEB-INF/views/user/login.jsp"%>
-			</c:when>
-		</c:choose>
-	</section>
+
+	<c:choose>
+		<c:when test="${LAYOUT == 'JOIN' }">
+			<%@ include file="/WEB-INF/views/user/join.jsp"%>
+		</c:when>
+		<c:when test="${LAYOUT == 'LOGIN' }">
+			<%@ include file="/WEB-INF/views/user/login.jsp"%>
+		</c:when>
+	</c:choose>
+
 
 
 

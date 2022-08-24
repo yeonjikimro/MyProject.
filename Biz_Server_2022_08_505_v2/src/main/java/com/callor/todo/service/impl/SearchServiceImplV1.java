@@ -36,9 +36,7 @@ public class SearchServiceImplV1 implements SearchService{
 		public String queryString(String search) {
 
 			String queryString = SearchConfig.API_FULL_URL;
-			
 			queryString = String.format(queryString,1 ,10 );
-			
 			log.debug("쿼리 스트링 {}", queryString);
 			
 			return queryString;

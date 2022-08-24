@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.callor.todo.persistance.NoticeDao">
+
+	<select id="selectAll" resultType="NoticeVO">
+		select * FROM tbl_noticeList
+	</select>
+
+	<select id="findById" resultType="NoticeVO">
+		SELECT * FROM tbl_noticeList
+		WHERE seq = #{seq}
+	</select>
+
+	<!-- insert 를 할때 username 칼럼에 로그인한 사용자 정보를 함께 insert 하여 username 에 해당하는 
+		데이터만 추출할 수 있도록 -->
+	<insert id="insert" parameterType="NoticeVO">
+		INSERT INTO tbl_noticeList(
+		seq,
+		title,
+		context,
+		id,
+		date
+		) VALUES(
+		#{seq},
+		#{title},
+		#{context},
+		#{id},
+		#{date}
+		)
+	</insert>
+
+	<update id="update"></update>
+	<delete id="delete"></delete>
+	
+	<select id="create_notice_table">
+		CREATE TABLE IF NOT EXISTS tbl_noticeList (
+			seq 	BIGINT AUTO_INCREMENT PRIMARY KEY,
+			title	VARCHAR(20) NOT NULL,
+			context VARCHAR(500),
+			id VARCHAR(10) NOT NULL,
+			date VARCHAR(20) NOT NULL
+		)
+	</select>
+
+</mapper> 

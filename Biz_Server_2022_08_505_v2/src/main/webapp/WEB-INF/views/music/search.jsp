@@ -59,8 +59,8 @@
 		<c:forEach items="${SEARCH}" var="search" varStatus="INDEX">
 		<tr data-seq="${search.PERF_NO}">
 			<td>${search.GUBUN2}</td>
-			<td>${search.TITLE_KOR}</td>
-			<td>${search.SONG_TITLE_KOR}</td>
+			<td><a href="${rootPath}/music/{seq}/detail">${search.TITLE_KOR}</a></td>
+			<td><a href="${rootPath}/music/{seq}/detail">${search.SONG_TITLE_KOR}</a></td>
 			<td>${search.PLACE_KOR}</td>
 			<td>${search.PERFORM_DATE}</td>
 			<td>${search.TICKET_KOR}</td>
