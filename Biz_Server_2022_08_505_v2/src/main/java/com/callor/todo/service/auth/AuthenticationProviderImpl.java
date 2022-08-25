@@ -1,5 +1,6 @@
 package com.callor.todo.service.auth;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,6 +62,8 @@ public class AuthenticationProviderImpl  implements AuthenticationProvider{
 		for(AuthorityVO vo : authList) {
 			grantList.add(new SimpleGrantedAuthority(vo.getAuthority()));
 		}
+		
+		
 		
 		/* 
 		 * 

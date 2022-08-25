@@ -46,33 +46,7 @@
 
 </style>
 <script>
-document.addEventListener("DOMContentLoaded",()=>{
-    const div_body = document.querySelector("div.todo_body")
-    div_body?.addEventListener("click",(e)=>{
-        const target = e.target
-        if(target.tagName == "DIV" 
-        		&& target.classList?.contains("todo_content")) {
-        	const seq = target?.dataset.seq
-        	// if(seq == false)
-        	if(!seq) {
-        		alert("완료된 항목은 수정할수 없음")
-        		return false
-        	}
-        	document.location.href = "${rootPath}/todo/update?t_seq=" + seq
-        			
-        } else if (target.tagName == "SPAN" 
-        		&& target.classList?.contains("todo_content")) {
-        	
-        	const parentDiv = target.closest("DIV")
-        	console.log(parentDiv)
-        	const seq = parentDiv?.dataset.seq
-        	document.location.href = "${rootPath}/todo/comp?t_seq=" + seq 
-        }
-    })
-})
-
 const rootPath = "${rootPath}"
-
 </script>
 <script src="${rootPath}/static/js/todo.js?20220816002"></script>
 <body>

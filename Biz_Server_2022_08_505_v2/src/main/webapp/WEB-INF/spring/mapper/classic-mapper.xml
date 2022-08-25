@@ -8,13 +8,13 @@
 	<select id="selectAll" resultType="ClassicVO">
 		select b.m_seq, a.s_seq,
 		a.song, a.musician, b.mood, a.address From tbl_songList as a
-		LEFT join tbl_moodList as b ON a.s_seq = b.s_seq
+		LEFT join tbl_moodList as b ON a.s_seq = b.seq
 	</select>
 	
 	<select id="findByMood" resultType="ClassicVO">
 		SELECT b.m_seq, a.s_seq,
 		a.song, a.musician, b.mood, a.address From tbl_moodList as b
-		LEFT join tbl_songList as a ON b.s_seq = a.s_seq
+		LEFT join tbl_songList as a ON b.seq = a.s_seq
 		WHERE mood = #{mood}
 	</select>
 

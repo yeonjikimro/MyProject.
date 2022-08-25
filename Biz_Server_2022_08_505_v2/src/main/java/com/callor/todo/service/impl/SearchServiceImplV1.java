@@ -1,13 +1,10 @@
 package com.callor.todo.service.impl;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -28,9 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service(QualifierConfig.SERVICE.SEARCH_V1)
 public class SearchServiceImplV1 implements SearchService{
-	
-		@Autowired
-		public SearchService searchService;
+
 
 		@Override
 		public String queryString(String search) {
@@ -93,6 +88,7 @@ public class SearchServiceImplV1 implements SearchService{
 		@Override
 		public SearchVO findById(Long PERF_NO) {
 			// TODO Auto-generated method stub
+
 			return null;
 		}
 

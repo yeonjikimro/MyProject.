@@ -37,6 +37,9 @@
 		margin: 30px auto;
 		font-size: 100px;
 	}
+	ul li {
+		list-style: none;
+	}
 	
 </style>
 </head>
@@ -59,8 +62,8 @@
 		<c:forEach items="${SEARCH}" var="search" varStatus="INDEX">
 		<tr data-seq="${search.PERF_NO}">
 			<td>${search.GUBUN2}</td>
-			<td><a href="${rootPath}/music/{seq}/detail">${search.TITLE_KOR}</a></td>
-			<td><a href="${rootPath}/music/{seq}/detail">${search.SONG_TITLE_KOR}</a></td>
+			<td><a href="${rootPath}/music/${search.PERF_NO}/detail">${search.TITLE_KOR}</a></td>
+			<td><a href="${rootPath}/music/${search.PERF_NO}/detail">${search.SONG_TITLE_KOR}</a></td>
 			<td>${search.PLACE_KOR}</td>
 			<td>${search.PERFORM_DATE}</td>
 			<td>${search.TICKET_KOR}</td>

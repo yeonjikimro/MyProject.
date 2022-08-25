@@ -61,13 +61,18 @@ public class SearchController {
 		return search;
 	}
 
-	@RequestMapping(value="/{seq}/detail", method=RequestMethod.GET)
-	public String detail(@PathVariable("seq") String PERF_NO,  Model model, SearchVO searchVO) {
+	@RequestMapping(value="/{PERF_NO}/detail", method=RequestMethod.GET)
+	public String detail(@PathVariable("PERF_NO") String queryString,  Model model, SearchVO searchVO) {
 		
-		long m_seq = Long.valueOf(PERF_NO);
-		searchVO = searchService.findById(m_seq);
 		
-		model.addAttribute("SEARCH", searchVO);
+		List<SearchVO> detailList = searchService.getSearchVOs(queryString);
+		
+		for(SearchVO vo : detailList) {
+			
+			model.addAttribute("DETAIL", vo);	
+			
+		}
+		
 		
 		
 		return "music/detail";

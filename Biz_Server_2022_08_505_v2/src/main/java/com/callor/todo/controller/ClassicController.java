@@ -31,9 +31,11 @@ public class ClassicController {
 		// username 을 get 하기
 		String username = principal.getName();
 		
+		log.debug("로그인한 사용자{}", username);
 		// 만약 혹시, 로그인된 사용자 정보를 알수 없으면
 		// 로그인 화면으로 redirect
 		if(username == null) {
+			
 			return "redirect:/user/login?error=LOGIN_NEED";
 		}
 
