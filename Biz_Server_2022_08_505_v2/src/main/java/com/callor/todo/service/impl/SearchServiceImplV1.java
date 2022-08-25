@@ -27,12 +27,14 @@ import lombok.extern.slf4j.Slf4j;
 public class SearchServiceImplV1 implements SearchService{
 
 
+	// pagenation
 		@Override
 		public String queryString(String search) {
 
 			String queryString = SearchConfig.API_FULL_URL;
+			// 리턴되는 문자열의 형식 지정 %d
 			queryString = String.format(queryString,1 ,10 );
-			log.debug("쿼리 스트링 {}", queryString);
+			log.debug("qer {}", queryString);
 			
 			return queryString;
 		}
@@ -51,18 +53,23 @@ public class SearchServiceImplV1 implements SearchService{
 				e.printStackTrace();
 			}
 			
-			
+			// Http 프로토콜에 부가적인 정보를 전송
 			HttpHeaders headers = new HttpHeaders();
+			
+			// JSON 데이터 타입으로 받겠다
 			headers.setAccept(
 					Collections.singletonList(MediaType.APPLICATION_JSON)
 			);
+			
+			// headers 에 추가된 정보를 Entity type 의 객체로 변환
+			// HTTP 요청(Request) 또는 응답(Response)에 해당하는 HttpHeader와 HttpBody를 포함하는 클래스
 			HttpEntity<String> headerEntity 
 				= new HttpEntity<String>("parameter",headers);
 			
-			
+			// REST API 호출이후 응답을 받을 때까지 기다리는 동기 방식, json과 xml 응답을 모두 받을 수 있다.
 			RestTemplate restTemp = new RestTemplate();
 			
-			
+			// HttpRequest에 대한 응답 데이터를 포함하는 클래스
 			ResponseEntity<String> resString = null;
 			resString = restTemp.exchange(foodRestURI, 
 					HttpMethod.GET,headerEntity,String.class);
@@ -78,8 +85,10 @@ public class SearchServiceImplV1 implements SearchService{
 					headerEntity, 
 					SearchRoot.class);
 			
-					resFoodObject.getBody();
-			
+				
+			// Api 에서 받은 데이터는 resFoodObject 의 body 에 담겨있다.
+			// body 데이터를 get 하여 그 데이터 중에서 items 만 추출하여
+			// Controller 로 return
 		return resFoodObject.getBody().SeoulPhilPblprfr.row;
 		}
 

@@ -1,5 +1,6 @@
 package com.callor.todo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -62,17 +63,22 @@ public class SearchController {
 	}
 
 	@RequestMapping(value="/{PERF_NO}/detail", method=RequestMethod.GET)
-	public String detail(@PathVariable("PERF_NO") String queryString,  Model model, SearchVO searchVO) {
+	public String detail(@PathVariable("PERF_NO") String seq,  Model model, SearchVO searchVO) {
+		
+		log.debug("glglglg {}", seq);
+		
+		List<SearchVO> selectList = searchService.getSearchVOs(searchService.queryString(null));
+		SearchVO detail = null;
 		
 		
-		List<SearchVO> detailList = searchService.getSearchVOs(queryString);
-		
-		for(SearchVO vo : detailList) {
-			
-			model.addAttribute("DETAIL", vo);	
-			
+		 long long_seq = Long.valueOf(seq);
+		for(SearchVO vo : selectList) {
+			if(vo.getPERF_NO() == long_seq) {
+				detail = vo;
+			}
 		}
 		
+		model.addAttribute("DETAIL",detail);
 		
 		
 		return "music/detail";

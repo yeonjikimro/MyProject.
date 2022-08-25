@@ -23,6 +23,7 @@ public class ClassicController {
 	@Autowired
 	private ClassicService classicService;
 
+	// RequestParam : name 에 있는 파라미터담아옴 만약 값이 존재하지 않을 경우 :NONE을 받아옴.)
 	
 	@RequestMapping(value="/test",method=RequestMethod.GET)
 	public String test(Principal principal,@RequestParam(name = "mood", required = false, defaultValue = "NONE") String mood, Model model) {
