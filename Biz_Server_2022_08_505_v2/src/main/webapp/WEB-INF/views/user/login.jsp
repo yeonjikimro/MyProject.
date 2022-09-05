@@ -17,6 +17,12 @@
 		<c:if test="${error=='LOGIN_NEED'}">
 			<div class='w3-text-red'>* 로그인이 필요한 서비스 입니다 *</div>
 		</c:if>
+		<c:if test="${error=='USERNAME_FAIL'}">
+			<div>* 아이디가 틀렸습니다 </div>
+		</c:if>
+		<c:if test="${error=='PASSWORD_FAIL'}">
+			<div> * 비밀번호가 틀렸습니다</div>
+		</c:if>
 		<label class="w3-text-blue">USER NAME</label>
 		<input name="username" class="w3-input w3-border"/>	
 	

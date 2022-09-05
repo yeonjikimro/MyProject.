@@ -56,6 +56,18 @@ public class ClassicServiceImplV1 implements ClassicService{
 		// TODO Auto-generated method stub
 		return classicDao.findByMood(mood);
 	}
+
+	@Override
+	public List<ClassicVO> findByCheck(ClassicVO vo) {
+		// TODO Auto-generated method stub
+		return classicDao.findByCheck(vo);
+	}
+
+	@Override
+	public List<ClassicVO> findBySong(String song) {
+		// TODO Auto-generated method stub
+		return classicDao.findBySong(song);
+	}
 	
 
 

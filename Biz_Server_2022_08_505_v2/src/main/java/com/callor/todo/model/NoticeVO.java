@@ -21,4 +21,5 @@ public class NoticeVO {
 	private String context;
 	private String id;
 	private String date;
+	private String file;
 }

@@ -1,12 +1,20 @@
 package com.callor.todo.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.callor.todo.model.ClassicVO;
 import com.callor.todo.model.UserVO;
+import com.callor.todo.service.ClassicService;
 import com.callor.todo.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +26,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ClassicService classicService;
 	
 	@RequestMapping(value="/join",method=RequestMethod.GET)
 	public String join(Model model) {
@@ -34,12 +45,117 @@ public class UserController {
 		return "redirect:/";
 		
 	}
-	
-	@RequestMapping(value="/login",method=RequestMethod.GET)
-	public String login(String error, Model model) {
-		model.addAttribute("LAYOUT","LOGIN");
-		model.addAttribute("error",error);
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public String login(String error, Model model, HttpSession session) {
+
+		model.addAttribute("error", error);
+		model.addAttribute("LAYOUT", "LOGIN");
+
+		
 		return "home";
+	}
+	
+	@RequestMapping(value="/login",method=RequestMethod.POST)
+	public String login(UserVO userVO, Model model, HttpSession session) {
+		UserVO loginUser = userService.findById(userVO.getUsername());
+		if(loginUser == null) {
+			model.addAttribute("error", "USERNAME_FAIL");
+			return "redirect:/user/login";
+		}
+		loginUser = userService.login(userVO);
+		if(loginUser == null) {
+			model.addAttribute("error", "PASSWORD_FAIL");
+			return "redirect:/user/login";
+		}
+		
+		session.setAttribute("USER", loginUser);
+		
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(HttpSession session) {
+		
+	
+		session.removeAttribute("USER");
+		return "redirect:/";
+		
+	}
+	
+	@RequestMapping(value="/{username}/mypage", method=RequestMethod.GET)
+	public String mypage(@PathVariable("username") String username, UserVO userVO, Model model, HttpSession session) {
+		
+		UserVO loginUser = (UserVO) session.getAttribute("USER");
+		
+		if(loginUser == null) {
+			model.addAttribute("error", "LOGIN_NEED");
+			return "redirect:/user/login";
+		}
+		
+		model.addAttribute("user", loginUser);
+
+		
+		
+		List<ClassicVO> checkList = classicService.findBySong(loginUser.getUsername());
+		List<ClassicVO> check1 = new ArrayList<ClassicVO>();
+		for (ClassicVO vo : checkList) {
+			if(vo.getCheckbox() == 0) {
+				return null;
+			} else {
+				check1.add(vo);
+			}
+		}
+		
+		model.addAttribute("CHECK", check1);
+		
+
+		return "user/mypage";
+	}
+
+	
+	
+	@RequestMapping(value="/{seq}/checkList", method=RequestMethod.GET)
+	public String checkList(@PathVariable("seq") String m_seq){
+		
+		
+		ClassicVO classVO = classicService.findById(m_seq);
+		
+		classVO.setCheckbox(1);
+		classicService.findByCheck(classVO);
+		
+		return "user/mypage";
+	}
+	
+	@RequestMapping(value="/jjim")
+	public String jjim(Model model, HttpSession session, UserVO userVO) {
+		UserVO loginUser = (UserVO) session.getAttribute("USER");
+		
+		if(loginUser == null) {
+			model.addAttribute("error", "LOGIN_NEED");
+			return "redirect:/user/login";
+		}
+		
+		model.addAttribute("NAME", loginUser);
+		
+		model.addAttribute("LAYOUT", "JJIM");
+		
+		return "user/mypage";
+	}
+	
+	@RequestMapping(value="/test")
+	public String test(Model model, HttpSession session, UserVO userVO) {
+		UserVO loginUser = (UserVO) session.getAttribute("USER");
+		
+		if(loginUser == null) {
+			model.addAttribute("error", "LOGIN_NEED");
+			return "redirect:/user/login";
+		}
+		
+		model.addAttribute("NAME", loginUser);
+
+		model.addAttribute("LAYOUT", "TEST");
+		
+		return "user/mypage";
 	}
 
 }

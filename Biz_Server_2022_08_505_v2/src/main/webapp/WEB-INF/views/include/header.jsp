@@ -3,8 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set value="${pageContext.request.contextPath}" var="rootPath" />
 
-<%@ taglib uri="http://www.springframework.org/security/tags"
-	prefix="sec"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
@@ -54,7 +52,6 @@ nav li {
 	padding-top: 30px;
 	display: flex;
 	vertical-align: middle;
-	display: flex;
 	margin-bottom: 0;
 }
 
@@ -108,16 +105,17 @@ nav li img {
 			<li><a href="${rootPath}/classic/test">맞춤 클래식 찾아보기</a></li>
 			<li><a href="${rootPath}/music/search">음악 검색하기</a></li>
 			<li><a href="${rootPath}/notice/text">게시판</a></li>
-
-			<sec:authorize access="isAnonymous()">
+			
+			
+			<c:if test="${empty USER}">
 				<li><a href="${rootPath}/user/login">로그인</a></li>
 				<li><a href="${rootPath}/user/join">회원가입</a></li>
-			</sec:authorize>
+			</c:if>
 
-			<sec:authorize access="isAuthenticated()">
-				<li><a href="${rootPath}/">로그아웃</a></li>
-				<li><a href="${rootPath}/user/mypage">myPage</a></li>
-			</sec:authorize>
+			<c:if test="${not empty USER}">
+				<li><a href="${rootPath}/user/logout">로그아웃</a></li>
+				<li><a href="${rootPath}/user/${USER.username}/mypage">myPage</a></li>
+			</c:if>
 		</ul>
 	</nav>
 

@@ -1,7 +1,8 @@
 package com.callor.todo.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.callor.todo.model.SearchVO;
+import com.callor.todo.model.UserVO;
 import com.callor.todo.service.SearchService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +33,7 @@ public class SearchController {
 	
 	@RequestMapping(value="/search", method=RequestMethod.GET)
 	public String music(Model model,
-			@RequestParam(name = "pageno", required = false, defaultValue="1") int pageno) {
+			@RequestParam(name = "pageno", required = false, defaultValue="1") int pageno, HttpSession session) {
 		
 //		searchPage.setCurrentPageNo(pageno);
 //		
@@ -44,6 +46,12 @@ public class SearchController {
 //		model.addAttribute("PAGE", dataList);
 //		
 //		
+		UserVO username = (UserVO) session.getAttribute("USER");
+		if(username == null) {
+			
+			return "redirect:/user/login?error=LOGIN_NEED";
+		}
+		
 		String queryString = searchService.queryString(pageno);
 		
 		List<SearchVO> searchList = searchService.getSearchVOs(queryString);

@@ -21,6 +21,7 @@ public class ClassicVO {
 	private String musician;
 	private String address;
 	private String mood;
+	private int checkbox;
 
 	
 }

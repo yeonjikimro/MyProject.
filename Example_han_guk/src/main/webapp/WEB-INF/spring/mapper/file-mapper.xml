@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hanguk.sample.persistance.FileDao">
+
+	<select id="selectAll" resultType="FileVO">
+		select * from tbl_file
+		order by f_seq
+	</select>
+
+	<select id="findById" resultType="FileVO">
+		select * from tbl_file
+		where seq= #{seq}
+	</select>
+
+	<insert id="insert" parameterType="FileVO">
+		insert into tbl_file(
+		f_seq,
+		originName,
+		writeName
+		) values (
+		#{f_seq},
+		#{originName},
+		#{writeName}
+		)
+
+	</insert>
+
+	<update id="update" parameterType="FileVO">
+		update tbl_file set
+		originName = #{originName},
+		writeName = #{writeName}
+		where
+		f_seq= #{f_seq}
+	</update>
+
+	<delete id="delete" parameterType="FileVO">
+		delete from tbl_file
+		where f_seq=#{f_seq}
+	</delete>
+
+
+	<select id="create_file_table">
+		create table if not exists tbl_file (
+		f_seq bigint auto_increment primary key,
+		originName varchar(100),
+		writeName varchar(100)
+		)
+	</select>
+
+
+</mapper>
+ 
+ 
+ 

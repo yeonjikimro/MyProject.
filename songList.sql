@@ -3,11 +3,12 @@
 create table tbl_songList (
 s_seq	VARCHAR(30)		Primary key,
 song	VARCHAR(100)	Not null	,
-Musician	VARCHAR(100)	Not null,	
-Address	VARCHAR(100)	
+musician	VARCHAR(100)	Not null,	
+address	VARCHAR(100),
+check TINYINT(1) default
 );
 
-insert into tbl_songList (s_seq, song, Musician, Address) values
+insert into tbl_songList (s_seq, song, musician, address) values
 ('S001',	'교향곡 3번 3악장',	'브람스',	'https://www.youtube.com/watch?v=DTEevBe41is'),
 ('S002',	'세레나데',	'슈베르트',	'https://www.youtube.com/watch?v=YG4E1X93ppo'),
 ('S003',	'마왕',	'슈베르트',	'https://www.youtube.com/watch?v=zqHogu_xqSs'),

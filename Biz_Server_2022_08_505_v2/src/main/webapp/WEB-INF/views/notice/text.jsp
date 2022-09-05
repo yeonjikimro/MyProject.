@@ -7,30 +7,42 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
-	section.title {
-		margin: 40px auto;
+	div.title {
+		display: flex;
+		flex-direction: column;
+		margin: 300px auto;
+		width: 60%;
 	}
 
 	table {
-		margin: 40px auto;
+		border-collapse: collapse;
 	}
 	button {
 		width: 100px;
-		margin-left: 0;
+		margin-left: auto;
+		margin-top: 100px;
+	}
+	table tr th {
+		border-bottom: 2px solid #ccc;
+		
+	}
+	table tr td {
+		border-bottom: 1px solid #ccc;
+		text-align: center;
+		margin-bottom: 30px;
 	}
 </style>
 </head>
 <body>
-<section class="title">
-<table class="w3-table w3-striped w3-bordered">
+<div class="title">
+<table>
 <colgroup>
-	<col width="30px">
+	<col width="100px">
+	<col width="300px">
+	<col width="300px">
 	<col width="100px">
 	<col width="100px">
-	<col width="40px">
-	<col width="40px">
 </colgroup>
 	<thead>
 		<tr>
@@ -42,19 +54,19 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
 		<c:forEach items="${NOTICE}" var="notice">
+		<tr>
 			<td>${notice.seq}</td>
-			<td>${notice.title}</td>
+			<td><a href="${rootPath}/notice/${notice.seq}/detail">${notice.title}</a></td>
 			<td>${notice.context}</td>
 			<td>${notice.id}</td>
 			<td>${notice.date}</td>
-		</c:forEach>
 		</tr>
+		</c:forEach>
 	</tbody>
 </table>
-		<button type="submit"> 글 작성</button>
+		<button type="submit"><a href="${rootPath}/notice/input">글 작성</a></button>
 
-</section>
+</div>
 </body>
 </html>

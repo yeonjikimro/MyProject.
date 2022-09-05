@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <c:set value="${pageContext.request.contextPath}" var="rootPath" />    
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib uri="http://www.springframework.org/tags/form"  prefix="form"%>
 <%@ include file="../include/header.jsp" %>
 <html>
@@ -24,6 +23,8 @@
 	}
 	div.select_div {
 		margin: 40px auto;
+		display: flex;
+		flex-direction: row;
 	}
 	
 	table {
@@ -43,12 +44,15 @@
 	div.2_list {
 		margin: 100px auto;
 	}
-
+	div.list_but {
+		margin-left : auto;
+	}
 </style>
 <script>
 const rootPath = "${rootPath}"
 </script>
 <script src="${rootPath}/static/js/todo.js?20220816002"></script>
+<script src="${rootPath}/static/js/checkButton.js?22-09-05-001"></script>
 <body>
 <div class="c_list">
 	<div>
@@ -65,6 +69,8 @@ const rootPath = "${rootPath}"
 					<option value="아침">아침</option>
 					<option value="힐링">힐링</option>
 		</select>
+		<div class="list_but"><a href="${rootPath}/user/${classic.m_seq}/checkList">
+		<button type="submit" onclick='getCheckboxValue()'>내 리스트에 담기</button></a></div>
 	</div>
 		<table class="w3-table w3-striped">
 		<colgroup>
@@ -78,7 +84,10 @@ const rootPath = "${rootPath}"
 					<th>곡 이름</th>
 					<th>작곡가</th>
 					<th>주소</th>
+					<th>음악담기</th>
 				</tr>
+				
+				<form method="get" action="/${user.username}/mypage">
 				<c:forEach items="${CLASSIC}" var="classic" varStatus="INDEX">
 					<tr>
 						<td>${INDEX.count}</td>
@@ -86,8 +95,10 @@ const rootPath = "${rootPath}"
 						<td>${classic.musician}</td>
 						<td><a href="${classic.address}">${classic.address}</a></td>
 						<td style="display: none">${classic.mood}</td>
+						<td><input type="checkbox" name="m_list" value="${classic.song}"></td>
 					</tr>
 				</c:forEach>
+				</form>
 			</table>
 		</div>
 </div>

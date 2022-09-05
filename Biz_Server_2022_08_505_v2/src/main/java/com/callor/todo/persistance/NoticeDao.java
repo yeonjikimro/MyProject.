@@ -1,9 +1,15 @@
 package com.callor.todo.persistance;
 
-import com.callor.todo.model.NoticeVO;
+import java.util.List;
 
-public interface NoticeDao extends GenericDao<NoticeVO, String> {
+import com.callor.todo.model.NoticeVO;
+import com.callor.todo.model.UserVO;
+
+public interface NoticeDao extends GenericDao<NoticeVO, Long> {
 	
 	public void create_notice_table();
+	public List<NoticeVO> findByUsername(String name);
+	
+
 
 }

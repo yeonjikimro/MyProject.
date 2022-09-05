@@ -3,8 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set value="${pageContext.request.contextPath}" var="rootPath" />
 
-<%@ taglib uri="http://www.springframework.org/security/tags"
-	prefix="sec"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ include file="./include/header.jsp"%>
 <!DOCTYPE html>
@@ -103,6 +101,7 @@ section.main {
 <body>
 <section class="main">
 		<h1>클래식 정보</h1>
+		
 		<div class="image_window">
 			<div class="images">
 				<c:forEach begin="1" end="5" items="${SEARCH}" var="poster">

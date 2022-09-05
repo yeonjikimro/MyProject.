@@ -1,4 +1,4 @@
-package com.callor.todo.model;
+package com.hanguk.sample.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,15 +9,14 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@NoArgsConstructor
 @ToString
-public class AuthorityVO {
+@Builder
+public class FileVO {
+	
+	private long f_seq;
+	private String originName;
+	private String writeName;
 
-    private int seq;
-    private String username;
-    private String authority;
 }
-
-
