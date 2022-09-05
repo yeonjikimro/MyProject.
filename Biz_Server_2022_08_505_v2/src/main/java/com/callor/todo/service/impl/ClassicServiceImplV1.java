@@ -1,9 +1,5 @@
 package com.callor.todo.service.impl;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +38,12 @@ public class ClassicServiceImplV1 implements ClassicService{
 	@Override
 	public int update(ClassicVO vo) {
 		// TODO Auto-generated method stub
-		return 0;
+			
+
+		vo.setCheckbox(1);
+	
+
+		return classicDao.update(vo);
 	}
 
 	@Override
@@ -57,17 +58,25 @@ public class ClassicServiceImplV1 implements ClassicService{
 		return classicDao.findByMood(mood);
 	}
 
+
 	@Override
-	public List<ClassicVO> findByCheck(ClassicVO vo) {
+	public ClassicVO findByUsername(String username){
+		// TODO Auto-generated method stub
+		return classicDao.findByUsername(username);
+	}
+
+	@Override
+	public ClassicVO findByCheck(ClassicVO vo) {
 		// TODO Auto-generated method stub
 		return classicDao.findByCheck(vo);
 	}
 
 	@Override
-	public List<ClassicVO> findBySong(String song) {
+	public ClassicVO findBySseq(String seq) {
 		// TODO Auto-generated method stub
-		return classicDao.findBySong(song);
+		return classicDao.findBySseq(seq);
 	}
+
 	
 
 

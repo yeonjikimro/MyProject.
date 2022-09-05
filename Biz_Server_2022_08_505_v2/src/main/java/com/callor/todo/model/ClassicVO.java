@@ -17,6 +17,7 @@ public class ClassicVO {
 
 	private String m_seq;
 	private String s_seq;
+	private String username;
 	private String song;
 	private String musician;
 	private String address;

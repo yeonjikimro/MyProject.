@@ -2,6 +2,8 @@ package com.callor.todo.persistance;
 
 import java.util.List;
 
+import com.callor.todo.model.ClassicVO;
+
 public interface GenericDao <VO, PK>{
 	
 	public List<VO> selectAll();

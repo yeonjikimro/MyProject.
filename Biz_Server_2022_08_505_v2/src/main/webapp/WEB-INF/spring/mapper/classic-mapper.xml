@@ -7,19 +7,19 @@
 
 	<select id="selectAll" resultType="ClassicVO">
 		select b.m_seq, a.s_seq,
-		a.song, a.musician, b.mood, a.address, a.checkbox From tbl_songList as a
+		a.song, a.musician, b.mood, a.address, a.checkbox, a.username From tbl_songList as a
 		LEFT join tbl_moodList as b ON a.s_seq = b.seq
 	</select>
 	
 	<select id="findByMood" resultType="ClassicVO">
 		SELECT b.m_seq, a.s_seq,
-		a.song, a.musician, b.mood, a.address, a.checkbox From tbl_moodList as b
+		a.song, a.musician, b.mood, a.address, a.checkbox, a.username From tbl_moodList as b
 		LEFT join tbl_songList as a ON b.seq = a.s_seq
 		WHERE mood = #{mood}
 	</select>
-	<select id="findBySong" resultType="ClassicVO">
+	<select id="findByUsername" resultType="ClassicVO">
 		SELECT * FROM tbl_songList
-		WHERE song = #{song}
+		WHERE username = #{username}
 	</select>
 
 	<select id="findById" resultType="ClassicVO">
@@ -32,41 +32,48 @@
 		WHERE checkbox = #{checkbox}
 	</select>
 
+	<select id="findBySseq" resultType="ClassicVO">
+		SELECT * FROM tbl_songList
+		WHERE s_seq = #{s_seq}
+	
+	</select>
 	<!-- insert 를 할때 username 칼럼에 로그인한 사용자 정보를 함께 insert 하여 username 에 해당하는 
 		데이터만 추출할 수 있도록 -->
 	<insert id="insert" parameterType="ClassicVO">
-		INSERT INTO tbl_joinList(
+		INSERT INTO tbl_songList(
 		m_seq,
 		s_seq,
 		song,
 		musician,
 		address,
-		mood,
-		checkbox
+		checkbox,
+		username
 		) VALUE(
 		#{m_seq},
 		#{s_seq},
 		#{song},
 		#{musician},
 		#{address},
-		#{mood},
-		#{checkbox}
+		#{checkbox},
+		#{username}
 		)
 	</insert>
 
 	<update id="update" parameterType="ClassicVO">
-	UPDATE tbl_joinList SET
+	UPDATE tbl_songList, tbl_moodList
+	SET
 		s_seq = #{s_seq},
 		song = #{song},
 		musician = #{musician},
 		address = #{address},
 		mood = #{mood},
-		checkbox = #{checkbox}
+		checkbox = #{checkbox},
+		username = #{username}
 	WHERE m_seq = #{m_seq}
 	</update>
 	
 	<delete id="delete">
-	DELETE from tbl_joinList
+	DELETE from tbl_songList
 		m_seq = #{m_seq}
 	</delete>
 

@@ -83,7 +83,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/{username}/mypage", method=RequestMethod.GET)
-	public String mypage(@PathVariable("username") String username, UserVO userVO, Model model, HttpSession session) {
+	public String mypage(@PathVariable("username") String username, UserVO userVO, Model model, HttpSession session, ClassicVO clas) {
 		
 		UserVO loginUser = (UserVO) session.getAttribute("USER");
 		
@@ -94,40 +94,15 @@ public class UserController {
 		
 		model.addAttribute("user", loginUser);
 
-		
-		
-		List<ClassicVO> checkList = classicService.findBySong(loginUser.getUsername());
-		List<ClassicVO> check1 = new ArrayList<ClassicVO>();
-		for (ClassicVO vo : checkList) {
-			if(vo.getCheckbox() == 0) {
-				return null;
-			} else {
-				check1.add(vo);
-			}
-		}
-		
-		model.addAttribute("CHECK", check1);
-		
 
 		return "user/mypage";
 	}
 
 	
-	
-	@RequestMapping(value="/{seq}/checkList", method=RequestMethod.GET)
-	public String checkList(@PathVariable("seq") String m_seq){
-		
-		
-		ClassicVO classVO = classicService.findById(m_seq);
-		
-		classVO.setCheckbox(1);
-		classicService.findByCheck(classVO);
-		
-		return "user/mypage";
-	}
+
 	
 	@RequestMapping(value="/jjim")
-	public String jjim(Model model, HttpSession session, UserVO userVO) {
+	public String jjim(Model model, HttpSession session, UserVO userVO, ClassicVO vo) {
 		UserVO loginUser = (UserVO) session.getAttribute("USER");
 		
 		if(loginUser == null) {
@@ -135,9 +110,31 @@ public class UserController {
 			return "redirect:/user/login";
 		}
 		
+
+		List<ClassicVO> checkList = new ArrayList<ClassicVO>();
+		
+		
+		ClassicVO check = classicService.findBySseq(vo.getS_seq());
+		
+		
+		log.debug("체크체크체크 {}", check);
+		
+//		if(check.getCheckbox() == 0) {
+//			return null;
+//		} else {
+//			checkList.add(check);
+//		}
+//
+//		log.debug("체크리스트 {} ", checkList);
+//		model.addAttribute("CHECK", checkList);
+		
+		
 		model.addAttribute("NAME", loginUser);
 		
 		model.addAttribute("LAYOUT", "JJIM");
+		
+		
+		
 		
 		return "user/mypage";
 	}

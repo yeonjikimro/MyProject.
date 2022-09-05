@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +33,7 @@ public class ClassicController {
 	// RequestParam : name 에 있는 파라미터담아옴 만약 값이 존재하지 않을 경우 :NONE을 받아옴.)
 	
 	@RequestMapping(value="/test",method=RequestMethod.GET)
-	public String test(HttpSession session, @RequestParam(name = "mood", required = false, defaultValue = "NONE") String mood, Model model) {
+	public String test(HttpSession session, @RequestParam(name = "mood", required = false, defaultValue = "NONE") String mood, Model model, ClassicVO vo) {
 
 		
 		UserVO username = (UserVO) session.getAttribute("USER");
@@ -52,12 +53,26 @@ public class ClassicController {
 			classicList = classicService.findByMood(mood);
 		}
 		log.debug("무드 {}", mood);
+		
 
 		model.addAttribute("CLASSIC", classicList);
 				
 		
 		return "classic/test";
 		
+	}
+	
+	@RequestMapping(value="/test", method=RequestMethod.POST)
+	public String checkbox(String check, ClassicVO vo) {
+		
+		ClassicVO cvo = classicService.findBySseq(check);
+		
+		
+		classicService.update(cvo);
+		log.debug("쳌ㅋㅋ {}", cvo);
+		
+		
+		return "redirect:/classic/test";
 	}
 
 	

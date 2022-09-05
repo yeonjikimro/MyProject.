@@ -1,12 +1,26 @@
 
 
+drop table tbl_songList;
 create table tbl_songList (
 s_seq	VARCHAR(30)		Primary key,
 song	VARCHAR(100)	Not null	,
 musician	VARCHAR(100)	Not null,	
 address	VARCHAR(100),
-check TINYINT(1) default
+checkbox TINYINT(1),
+username VARCHAR(30)
 );
+
+select * from tbl_joinList;
+drop table tbl_joinList;
+
+create view tbl_tableList as
+select b.m_seq, a.s_seq,
+a.song, a.musician, b.mood, a.address, a.checkbox, a.username From tbl_songList as a
+LEFT join tbl_moodList as b ON a.s_seq = b.seq;
+
+
+
+
 
 insert into tbl_songList (s_seq, song, musician, address) values
 ('S001',	'교향곡 3번 3악장',	'브람스',	'https://www.youtube.com/watch?v=DTEevBe41is'),
