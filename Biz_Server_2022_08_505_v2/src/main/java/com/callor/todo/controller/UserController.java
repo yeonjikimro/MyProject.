@@ -127,7 +127,7 @@ public class UserController {
 
 		ClassicVO cvo = classicService.findBySseq(vo.getS_seq());
 		
-		log.debug("체크체크체크 {}", cvo);
+		log.debug("체크체크 {}", cvo);
 		
 //		if(check.getCheckbox() == 0) {
 //			return null;
