@@ -39,9 +39,8 @@ public class ClassicServiceImplV1 implements ClassicService{
 	public int update(ClassicVO vo) {
 		// TODO Auto-generated method stub
 			
-
+		
 		vo.setCheckbox(1);
-	
 
 		return classicDao.update(vo);
 	}
@@ -59,11 +58,7 @@ public class ClassicServiceImplV1 implements ClassicService{
 	}
 
 
-	@Override
-	public ClassicVO findByUsername(String username){
-		// TODO Auto-generated method stub
-		return classicDao.findByUsername(username);
-	}
+
 
 	@Override
 	public ClassicVO findByCheck(ClassicVO vo) {

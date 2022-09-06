@@ -70,7 +70,7 @@ const rootPath = "${rootPath}"
 		<div class="list_but">
 
 		</div>
-	<form action="${rootPath}/classic/test" method="post">
+	<form action="${rootPath}/user/${USER.username}/mypage" method="post">
 		<table class="w3-table w3-striped">
 		<colgroup>
 			<col width="100px">

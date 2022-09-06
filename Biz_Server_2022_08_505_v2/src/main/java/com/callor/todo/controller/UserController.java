@@ -99,7 +99,19 @@ public class UserController {
 	}
 
 	
-
+	
+	@RequestMapping(value="/{username}/mypage", method=RequestMethod.POST)
+	public String checkbox(String check, ClassicVO vo) {
+		
+		ClassicVO cvo = classicService.findBySseq(check);
+		
+		
+		classicService.update(cvo);
+		log.debug("쳌ㅋㅋ {}", cvo);
+		
+		
+		return "redirect:/classic/test";
+	}
 	
 	@RequestMapping(value="/jjim")
 	public String jjim(Model model, HttpSession session, UserVO userVO, ClassicVO vo) {
@@ -112,12 +124,10 @@ public class UserController {
 		
 
 		List<ClassicVO> checkList = new ArrayList<ClassicVO>();
+
+		ClassicVO cvo = classicService.findBySseq(vo.getS_seq());
 		
-		
-		ClassicVO check = classicService.findBySseq(vo.getS_seq());
-		
-		
-		log.debug("체크체크체크 {}", check);
+		log.debug("체크체크체크 {}", cvo);
 		
 //		if(check.getCheckbox() == 0) {
 //			return null;

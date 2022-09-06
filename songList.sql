@@ -10,7 +10,7 @@ checkbox TINYINT(1),
 username VARCHAR(30)
 );
 
-select * from tbl_joinList;
+select * from tbl_tableList;
 drop table tbl_joinList;
 
 create view tbl_tableList as

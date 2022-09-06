@@ -7,20 +7,17 @@
 
 	<select id="selectAll" resultType="ClassicVO">
 		select b.m_seq, a.s_seq,
-		a.song, a.musician, b.mood, a.address, a.checkbox, a.username From tbl_songList as a
+		a.song, a.musician, b.mood, a.address, a.checkbox From tbl_songList as a
 		LEFT join tbl_moodList as b ON a.s_seq = b.seq
 	</select>
 	
 	<select id="findByMood" resultType="ClassicVO">
 		SELECT b.m_seq, a.s_seq,
-		a.song, a.musician, b.mood, a.address, a.checkbox, a.username From tbl_moodList as b
+		a.song, a.musician, b.mood, a.address, a.checkbox From tbl_moodList as b
 		LEFT join tbl_songList as a ON b.seq = a.s_seq
 		WHERE mood = #{mood}
 	</select>
-	<select id="findByUsername" resultType="ClassicVO">
-		SELECT * FROM tbl_songList
-		WHERE username = #{username}
-	</select>
+
 
 	<select id="findById" resultType="ClassicVO">
 		SELECT * FROM tbl_moodList
@@ -46,16 +43,14 @@
 		song,
 		musician,
 		address,
-		checkbox,
-		username
+		checkbox
 		) VALUE(
 		#{m_seq},
 		#{s_seq},
 		#{song},
 		#{musician},
 		#{address},
-		#{checkbox},
-		#{username}
+		#{checkbox}
 		)
 	</insert>
 
@@ -67,8 +62,7 @@
 		musician = #{musician},
 		address = #{address},
 		mood = #{mood},
-		checkbox = #{checkbox},
-		username = #{username}
+		checkbox = #{checkbox}
 	WHERE m_seq = #{m_seq}
 	</update>
 	
