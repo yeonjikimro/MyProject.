@@ -107,7 +107,7 @@ public class UserController {
 		
 		
 		classicService.update(cvo);
-		log.debug("쳌ㅋ {}", cvo);
+		log.debug("쳌ㅋㅋ {}", cvo);
 		
 		
 		return "redirect:/classic/test";
