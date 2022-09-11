@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.callor.todo.model.CheckVO;
 import com.callor.todo.model.ClassicVO;
 import com.callor.todo.model.UserVO;
+import com.callor.todo.service.CheckService;
 import com.callor.todo.service.ClassicService;
 import com.callor.todo.service.UserService;
 
@@ -29,6 +31,9 @@ public class UserController {
 	
 	@Autowired
 	private ClassicService classicService;
+	
+	@Autowired
+	private CheckService checkService;
 	
 	@RequestMapping(value="/join",method=RequestMethod.GET)
 	public String join(Model model) {
@@ -83,7 +88,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/{username}/mypage", method=RequestMethod.GET)
-	public String mypage(@PathVariable("username") String username, UserVO userVO, Model model, HttpSession session, ClassicVO clas) {
+	public String mypage(@PathVariable("username") String username, UserVO userVO, Model model, HttpSession session, CheckVO checkVO) {
 		
 		UserVO loginUser = (UserVO) session.getAttribute("USER");
 		
@@ -92,7 +97,38 @@ public class UserController {
 			return "redirect:/user/login";
 		}
 		
+		
 		model.addAttribute("user", loginUser);
+		
+		
+		checkVO.setUsername(loginUser.getUsername());
+		checkService.insert(checkVO);
+
+		
+		
+		List<CheckVO> checkList = new ArrayList<CheckVO>();
+
+		
+		checkList = checkService.findByCheck();
+		
+		
+		// username이 너무 많아서(노래 리스트마다 등록)반환이 안되
+		
+		if(loginUser.getUsername().equals(checkVO.getUsername())) {
+		
+			model.addAttribute("cht", checkList);
+			
+		}
+			
+		
+		
+//		
+//		if(vo.getCheckbox() == 1) {
+//			checkList.add(check);
+//		}
+
+		log.debug("체크리스트 {} ", checkList);
+
 
 
 		return "user/mypage";
@@ -101,53 +137,25 @@ public class UserController {
 	
 	
 	@RequestMapping(value="/{username}/mypage", method=RequestMethod.POST)
-	public String checkbox(String check, ClassicVO vo) {
+	public String checkbox(String check, CheckVO checkVO) {
 		
 		ClassicVO cvo = classicService.findBySseq(check);
 		
-		
+		log.debug("업데이트 전 : {}", cvo);
+		cvo.setCheckbox(1);
 		classicService.update(cvo);
-		log.debug("쳌ㅋㅋ {}", cvo);
+		log.debug("set 이후 : {}", cvo);
+	
 		
+		checkVO.setSong(cvo.getSong());
+		checkVO.setMusician(cvo.getMusician());
+		checkVO.setCheckbox(cvo.getCheckbox());
+		checkService.insert(checkVO);
 		
 		return "redirect:/classic/test";
 	}
 	
-	@RequestMapping(value="/jjim")
-	public String jjim(Model model, HttpSession session, UserVO userVO, ClassicVO vo) {
-		UserVO loginUser = (UserVO) session.getAttribute("USER");
-		
-		if(loginUser == null) {
-			model.addAttribute("error", "LOGIN_NEED");
-			return "redirect:/user/login";
-		}
-		
-
-		List<ClassicVO> checkList = new ArrayList<ClassicVO>();
-
-		ClassicVO cvo = classicService.findBySseq(vo.getS_seq());
-		
-		log.debug("체크체크 {}", cvo);
-		
-//		if(check.getCheckbox() == 0) {
-//			return null;
-//		} else {
-//			checkList.add(check);
-//		}
-//
-//		log.debug("체크리스트 {} ", checkList);
-//		model.addAttribute("CHECK", checkList);
-		
-		
-		model.addAttribute("NAME", loginUser);
-		
-		model.addAttribute("LAYOUT", "JJIM");
-		
-		
-		
-		
-		return "user/mypage";
-	}
+	
 	
 	@RequestMapping(value="/test")
 	public String test(Model model, HttpSession session, UserVO userVO) {

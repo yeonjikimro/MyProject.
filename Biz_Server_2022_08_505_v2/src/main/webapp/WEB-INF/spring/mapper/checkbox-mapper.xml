@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.callor.todo.persistance.CheckDao">
+ 
+ 	<select id="selectAll" resultType="CheckVO">
+ 		select * FROM tbl_check
+ 	</select>
+ 	
+ 	<select id="findById" resultType="CheckVO">
+ 		SELECT * FROM tbl_check
+ 		WHERE seq = #{seq}
+ 	</select>
+ 	
+ 	<select id="findByCheck" resultType="CheckVO">
+ 		SELECT * FROM tbl_check
+ 		WHERE checkbox = 1
+ 	</select>
+ 	
+ 	<select id="putUsername" resultType="CheckVO">
+ 		SELECT * FROM tbl_check
+ 		WHERE username=#{username}
+ 	</select>
+ 	
+ 	<insert id="insert" parameterType="CheckVO">
+ 		INSERT INTO tbl_check (
+ 		seq,
+ 		checkbox,
+ 		username,
+ 		song,
+		musician
+ 		) VALUES (
+ 		#{seq},
+ 		#{checkbox},
+ 		#{username},
+ 		#{song},
+ 		#{musician}
+ 		)
+ 	</insert>
+ 	
+ 	<update id="update" parameterType="CheckVO">
+ 		UPDATE tbl_check SET
+ 		checkbox = #{checkbox},
+ 		username = #{username},
+ 		song = #{song},
+ 		musician = #{musician},
+ 		WHERE seq = #{seq}
+ 	</update>
+ 	
+ 	<delete id="delete">
+ 		DELETE FROM tbl_check
+ 		where seq = #{seq}
+ 	</delete>
+ 	
+ 	
+ 	<select id="create_tbl_check">
+ 	CREATE TABLE IF NOT EXISTS tbl_check (
+		seq VARCHAR(20),
+	    checkbox TINYINT(1) default 0,
+	    username VARCHAR (100),
+	    song VARCHAR (100),
+	    musician VARCHAR(50)
+	)
+ 	</select>
+ 	
+ 	</mapper>

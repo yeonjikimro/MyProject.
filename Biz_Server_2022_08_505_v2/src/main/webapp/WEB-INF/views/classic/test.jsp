@@ -42,9 +42,15 @@
 	}
 	div.2_list {
 		margin: 100px auto;
+		display: flex;
+		flex-direction: column;
 	}
 	div.list_but {
 		margin-left : auto;
+	}
+	div.but button {
+		display: flex;
+		margin-left: auto;
 	}
 </style>
 <script>
@@ -56,21 +62,23 @@ const rootPath = "${rootPath}"
 	<div>
 		<h1 class="title" >Classic Recommend</h1>
 	</div>
-<div class="2_list">
-	<div class="select_div">
-		<select style="width:200px" class="deal" name="method">
-					<option value="">오늘의 기분</option>
-					<option value="슬픔">슬픔</option>
-					<option value="비">비</option>
-					<option value="힘">힘</option>
-					<option value="공부">공부</option>
-					<option value="아침">아침</option>
-					<option value="힐링">힐링</option>
-		</select>
-		<div class="list_but">
-
+	<div class="2_list">
+		<div class="select_div">
+			<select style="width:200px" class="deal" name="method">
+						<option value="">오늘의 기분</option>
+						<option value="슬픔">슬픔</option>
+						<option value="비">비</option>
+						<option value="힘">힘</option>
+						<option value="공부">공부</option>
+						<option value="아침">아침</option>
+						<option value="힐링">힐링</option>
+			</select>
+	
 		</div>
 	<form action="${rootPath}/user/${USER.username}/mypage" method="post">
+		<div class="but">
+			<button type="submit"> 내 리스트에 담기</button>
+		</div>
 		<table class="w3-table w3-striped">
 		<colgroup>
 			<col width="100px">
@@ -97,9 +105,8 @@ const rootPath = "${rootPath}"
 				</c:forEach>				
 
 			</table>
-			<button type="submit"> 내 리스트에 담기</button>
 	</form>
-		</div> 
+	</div> 
 </div>
 
 

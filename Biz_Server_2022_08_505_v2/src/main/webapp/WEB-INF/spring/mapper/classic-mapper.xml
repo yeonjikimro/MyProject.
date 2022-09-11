@@ -55,15 +55,13 @@
 	</insert>
 
 	<update id="update" parameterType="ClassicVO">
-	UPDATE tbl_songList, tbl_moodList
+	UPDATE tbl_songList
 	SET
-		s_seq = #{s_seq},
 		song = #{song},
 		musician = #{musician},
 		address = #{address},
-		mood = #{mood},
 		checkbox = #{checkbox}
-	WHERE m_seq = #{m_seq}
+	WHERE s_seq = #{s_seq}
 	</update>
 	
 	<delete id="delete">

@@ -38,10 +38,7 @@ public class ClassicServiceImplV1 implements ClassicService{
 	@Override
 	public int update(ClassicVO vo) {
 		// TODO Auto-generated method stub
-			
-		
-		vo.setCheckbox(1);
-
+	
 		return classicDao.update(vo);
 	}
 

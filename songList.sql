@@ -6,20 +6,36 @@ s_seq	VARCHAR(30)		Primary key,
 song	VARCHAR(100)	Not null	,
 musician	VARCHAR(100)	Not null,	
 address	VARCHAR(100),
-checkbox TINYINT(1),
-username VARCHAR(30)
+checkbox TINYINT(1) default 0
 );
 
+select a.seq, a.checkbox, a.username, b.song, b.musician, b.address From tbl_check as a
+		LEFT join tbl_songList as b ON a.seq = b.s_seq;
+
+select * from tbl_songList;
+
+use mytodoDB;
+
+select * from tbl_check;
+drop table tbl_check;
+
+
 select * from tbl_tableList;
-drop table tbl_joinList;
+
 
 create view tbl_tableList as
 select b.m_seq, a.s_seq,
-a.song, a.musician, b.mood, a.address, a.checkbox, a.username From tbl_songList as a
+a.song, a.musician, b.mood, a.address, a.checkbox From tbl_songList as a
 LEFT join tbl_moodList as b ON a.s_seq = b.seq;
 
 
-
+create table tbl_check (
+	seq VARCHAR(20),
+    checkbox TINYINT(1) default 0,
+    username VARCHAR (100),
+	song VARCHAR (100),
+	musician VARCHAR(50)
+);
 
 
 insert into tbl_songList (s_seq, song, musician, address) values
